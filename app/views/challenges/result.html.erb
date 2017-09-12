@@ -1,0 +1,20 @@
+<%= hidden_field_tag :current_id, "#{@applicant.id}"%>
+
+<head>
+  <div class="headerChallenge">
+    <img class="headerImg" src="<%=image_path('unity&web.png')%>" />
+    <div class="headerText">Spring_WebTest</div>
+    <div class="userChallenge">
+      "<%= @applicant.name %>"님 시험이 종료되었습니다!
+    </div>
+  </div>
+</head>
+<br>
+<br>
+<div class="resultChallenge">
+  <img class="resultImg" src="<%=image_path('resultImg')%>" />
+  <div class="resultBox">
+    <b>최종점수</b>
+    <div class="scorePoint"></div>
+  </div>
+</div>

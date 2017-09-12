@@ -1,0 +1,36 @@
+
+<head>
+  <div class="title">
+    <img class="titleImg" src="<%=image_path('codeacademyW.png')%>" />
+    <div class="titleText">Listing Appicants</div>
+  </div>
+</head>
+<table style="text-align: center" width="100%" rules=none>
+  <thead>
+  <tr style="color:white" bgcolor="black" height="35">
+    <th>Name</th>
+    <th>Email</th>
+    <th>Challenge</th>
+    <th colspan = "2">Function</th>
+    <th><%= link_to 'New Applicant', new_applicant_path %></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @applicants.each do |applicant| %>
+      <tr height="30" bgcolor="silver">
+        <td><%= applicant.name %></td>
+        <td><%= applicant.email %></td>
+        <td><%= applicant.challenge.title %></td>
+        <td><%= link_to 'Show', applicant %></td>
+        <td><%= link_to 'Edit', edit_applicant_path(applicant) %></td>
+        <td><%= link_to 'Destroy', applicant, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+<br>
+<br>
+<div class="bottom" >
+  <img class="invition" src="<%=image_path('invite.jpg')%>" />
+</div>

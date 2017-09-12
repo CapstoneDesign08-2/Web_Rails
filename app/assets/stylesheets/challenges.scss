@@ -1,0 +1,126 @@
+
+// Place all the styles related to the challenges controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+hr{
+  width:1150px;
+  align:left;
+  border: solid 1px #00acff;
+}
+
+.headerChallenge{
+  margin: 0 auto;
+  display:flex;
+  width:1200px;
+  height: 120px;
+  background-color: black;
+  color:white;
+}
+
+.headerImg{
+  margin-left: 10px;
+  margin-top: 10px;
+  flex:0.4;
+  height: 100px;
+
+}
+
+.headerText{
+  margin-left: 20px;
+  font-size:50px;
+  font-weight: 500;
+  flex:3;
+  line-height: 100px;
+}
+
+.userChallenge{
+  margin-right:5px;
+  flex:1.5;
+  text-align:right;
+  line-height: 200px;
+  font-size: 20px;
+  letter-spacing: 3px;
+}
+
+.showChallenge{
+  margin : 0 auto;
+  width:1150px;
+  height:800px;
+}
+
+.goal{
+  font-size: 30px;
+}
+
+.infoChallenge{
+  font-size:20px;
+}
+
+.infoBox{
+  font-size:20px;
+  font-weight:600;
+  line-height: 1.5em;
+  color:red;
+  text-align: center;
+  width : 700px;
+  background-color: black;
+  float:left;
+  margin-bottom: 20px;
+}
+
+.infoBox2{
+  margin-left: 20px;
+  margin-bottom: 20px;
+  float:left;
+  font-size:20px;
+  font-weight:600;
+  line-height: 1.5em;
+  color:#ff0037;
+  text-align: center;
+  width : 430px;
+  background-color: black;
+}
+
+.itemChallenge{
+  text-indent:10px;
+  line-height: 2.5em;
+  color:white;
+  background-color: black;
+  margin-left: 15px;
+  float:left;
+  border-radius: 0.8em;
+  width:435px;
+}
+
+.bottomChallenge{
+  margin: 0 auto;
+  width:1200px;
+  height: 500px;
+}
+.resultBox{
+  width:1000px;
+  margin:0 auto;
+  background-color: white;
+  line-height: 1.5em;
+  font-size:18px;
+  text-align: center;
+}
+
+.finChallenge{
+  margin-top: 100px;
+  text-align: center;
+  font-size: 18px;
+}
+
+.resultChallenge{
+  margin : 0 auto;
+  width:1150px;
+  height:800px;
+  text-align: center;
+}
+
+.resultImg{
+  margin-bottom: 50px;
+}
+

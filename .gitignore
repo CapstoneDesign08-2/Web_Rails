@@ -1,0 +1,13 @@
+*.bundle
+log/*
+tmp/*
+!/log/*.keep
+!/tmp/*.keep
+
+*.byebug_history
+*.lock
+public/*
+unzip/*
+config/database.yml
+config/initializers/fog.rb
+*.zip

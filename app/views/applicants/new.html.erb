@@ -1,0 +1,14 @@
+<head>
+  <div class="title">
+    <img class="titleImg" src="<%=image_path('codeacademyW.png')%>" />
+    <div class="titleText">New Appicants</div>
+  </div>
+</head>
+
+
+<br>
+<div class="edition">
+  <%= render 'form', applicant: @applicant %>
+
+  <%= link_to 'Back', applicants_path %>
+</div>

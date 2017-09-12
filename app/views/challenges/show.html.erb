@@ -1,0 +1,77 @@
+<%= hidden_field_tag :current_id, "#{@applicant.id}"%>
+
+<head>
+  <div class="headerChallenge">
+    <img class="headerImg" src="<%=image_path('unity&web.png')%>" />
+    <div class="headerText">Spring_WebTest</div>
+    <div class="userChallenge">
+      "<%= @applicant.name %>"님 환영합니다!
+    </div>
+  </div>
+</head>
+<br>
+<br>
+<div class="showChallenge">
+  <div class="goal">
+    <strong>Goal : </strong>
+    <%= @challenge.title %> - <%= @challenge.goal %>
+  </div>
+  <br><br>
+  <hr>
+  <br><br>
+
+  <div class="infoBox">
+    Information
+    <textarea  style="width: 680px; height:400px;" readonly="readonly" ><%= @challenge.information %></textarea>
+  </div>
+  <div class="infoBox2">
+    Ex
+    <div><%= image_tag "#{@challenge.id}.jpg", height: '320', width: '410' %></div>
+  </div>
+
+
+  <div class="infoBox">
+    Description
+    <textarea style="width: 680px; height:75px;" readonly="readonly"><%= @challenge.description %></textarea>
+  </div>
+
+  <div class="itemChallenge">
+    <div>
+      <%=form_for @applicant do |f|%>
+      <strong>Language - </strong>
+      <%= f.select :language, [['SpringBoot'],['RubyonRails']] %>
+          <%=f.submit "Change"%>
+      <%end%>
+    </div>
+    <div>
+    <strong>File_Download : </strong>
+    <%= link_to 'link', "/download/#{@challenge.id}/#{@challenge.title}/#{@applicant.language}.zip" %>
+    <!--(, download: 'data.zip')-->
+    </div>
+
+    <div>
+    <%= form_for @applicant do |f| %>
+        <strong>Upload_File : </strong>
+        <%= f.file_field :attachment, accept: '.zip'  %>
+        <%= f.submit "Upload" %>
+    <% end %>
+    </div>
+
+    <%= form_for(@challenge, remote: true) do |g| %>
+        <strong>Submit : </strong>
+        <%= g.submit "GradeTest", class: "gradeTest" %>
+    <%end%>
+    </div>
+  </div>
+</div>
+<div class="bottomChallenge">
+  <div class="resultBox">
+    <div class="resultBold">실행상태</div>
+    <div class="resultPoint"></div>
+    <div class="result">Ready</div>
+  </div>
+  <br>
+  <div class="finChallenge">
+    <%= link_to '시험종료', '/challenges/result/'+"#{@applicant.id}", data: { confirm: 'Are you sure?' }%>
+  </div>
+</div>

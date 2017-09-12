@@ -1,0 +1,44 @@
+
+<head>
+  <div class="title">
+    <img class="titleImg" src="<%=image_path('codeacademyW.png')%>" />
+    <div class="titleText">Show Appicants</div>
+  </div>
+</head>
+
+<div>
+  <img class="sideImg" src="<%=image_path('showimg.jpeg')%>" />
+</div>
+<div class="show">
+  <div>
+    <strong>Name:</strong>
+    <%= @applicant.name %>
+  </div>
+
+  <div>
+    <strong>Email:</strong>
+    <%= @applicant.email %>
+  </div>
+
+  <div>
+    <strong>Challenge:</strong>
+    <%= @applicant.challenge.title %>
+  </div>
+
+  <div>
+    <table>
+      <thead>
+        <th>Web_Build :</th>
+        <td><%= button_to 'Build', building_applicant_path, data: { confirm: '50초 동안 확인할 수 있습니다.'}  %></td>
+      </thead>
+    </table>
+    <strong>View_Site:</strong>
+    <% id = ((@applicant.id).to_s) %>
+    <% host_ip = Socket.ip_address_list.detect{|intf| intf.ipv4_private?}.ip_address %>
+    <%= link_to 'Link', 'http://' + host_ip + ':110' + id, :target => '_blank'%>
+  </div>
+  <div class="edition">
+    <%= link_to 'Edit', edit_applicant_path(@applicant) %> |
+    <%= link_to 'Back', applicants_path %>
+  </div>
+</div>

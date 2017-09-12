@@ -1,0 +1,57 @@
+// Place all the styles related to the applicants controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+@-moz-keyframes ani_fadein { from { opacity: 0; }  to { } }
+@-webkit-keyframes ani_fadein { from { opacity: 0; }  to { } }
+
+body{
+  background-color: #e9eeff
+}
+
+.edition{
+  text-align:center;
+  font-size: 20px;
+}
+
+.field{
+  line-height: 2em;
+}
+
+.title{
+  //text-align:center;
+  display: flex;
+  font-size :30px;
+  font-weight: 700;
+  background-color: black;
+  color : white;
+}
+.titleText{
+  margin-left: 50px;
+  flex:3;
+}
+.titleImg{
+  flex:0.5;
+}
+
+.bottom{
+  text-align:center;
+}
+
+.invition {
+  -webkit-animation: ani_fadein 2.8s;
+  -moz-animation: ani_fadein 2.8s;
+  width:75%;
+}
+.sideImg{
+  margin-top: 2%;
+  float:left;
+  width:20%;
+
+}
+.show{
+  margin-top: 2%;
+  margin-left: 5%;
+  float:left;
+  font-size:20px;
+  line-height: 3em;
+}
