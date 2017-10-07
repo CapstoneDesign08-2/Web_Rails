@@ -14,4 +14,4 @@ MySQL, MySQL workbench
 1. 처음 실행시 - 터미널 - sudo rake db:drop, sudo rake db:migrate, sudo rake db:seed
 2. DB에서 응시자의 토큰 확보
 3. 터미널 - sudo rails s
-4. Web - localhost:3000(관리자), localhost:3000/challenges/1?token='토큰' (응시자)
+4. Web - localhost:3000(관리자), localhost:3000/challenges/4?token='토큰' (응시자)
