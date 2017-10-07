@@ -99,7 +99,7 @@ class TestJob < ApplicationJob
       else
         @failMessage = "SUCCESS"
       end
- 
+
       @applicant.log = @failMessage
       @applicant.score = 100 - (@arrFailMessages.size * 12)
       @applicant.save
