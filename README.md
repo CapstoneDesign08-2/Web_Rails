@@ -15,4 +15,3 @@ MySQL, MySQL workbench
 2. DB에서 응시자의 토큰 확보
 3. 터미널 - sudo rails s
 4. Web - localhost:3000(관리자), localhost:3000/challenges/4?token='토큰' (응시자)
- 

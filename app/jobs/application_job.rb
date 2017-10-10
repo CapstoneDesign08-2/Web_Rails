@@ -1,6 +1,6 @@
 class ApplicationJob < ActiveJob::Base
 
-  $project_unzip_path = "/home/user/R/Web_Rails/unzip"
+  $project_unzip_path = "/home/hong/RubymineProjects/Web_Rails/unzip"
 
   def create_spring_test_docker
     begin

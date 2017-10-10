@@ -6,8 +6,8 @@ tmp/*
 
 *.byebug_history
 *.lock
-public/*
-unzip/*
+**/public/
+**/unzip/
 config/database.yml
 config/initializers/fog.rb
 *.zip
