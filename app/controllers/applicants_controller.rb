@@ -30,7 +30,7 @@ class ApplicantsController < ApplicationController
     RunJob.perform_later @applicant.id
 
 
-    
+
     require 'timers'
     timers = Timers::Group.new
 
@@ -79,7 +79,7 @@ class ApplicantsController < ApplicationController
         format.html {redirect_to @applicant.challenge, notice: 'Applicant was successfully updated'}
         if @applicant.attachment != nil
           #puts "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-          output = system("rm -f -r /home/hong/RubymineProjects/Web_Rails/unzip/#{@applicant.id}/")
+          output = system("rm -f -r #{__dir__}/../../unzip/#{@applicant.id}/")
           output = system("unzip -o ./public/#{@applicant.attachment} -d ./unzip/#{@applicant.id} ")
           puts  "unzip : #{output}"
 
