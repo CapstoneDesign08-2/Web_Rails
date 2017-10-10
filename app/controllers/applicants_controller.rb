@@ -29,6 +29,7 @@ class ApplicantsController < ApplicationController
   def building
     RunJob.perform_later @applicant.id
 
+    
     require 'timers'
     timers = Timers::Group.new
 
