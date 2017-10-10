@@ -35,7 +35,8 @@
     <strong>View_Site:</strong>
     <% id = ((@applicant.id).to_s) %>
     <% host_ip = Socket.ip_address_list.detect{|intf| intf.ipv4_private?}.ip_address %>
-    <%= link_to 'Link', 'http://' + host_ip + ':110' + id, :target => '_blank'%>
+    <% port = (6000 + @applicant.id).to_s %>
+    <%= link_to 'Link', 'http://' + host_ip + ':' + port, :target => '_blank'%>
   </div>
   <div class="edition">
     <%= link_to 'Edit', edit_applicant_path(@applicant) %> |
