@@ -1,6 +1,6 @@
 class ApplicantsController < ApplicationController
-  before_action :set_applicant, only: [:show, :edit, :update, :destroy, :logging, :building, :score]
-  before_action :set_docker, only: [:update, :show]
+  before_action :setApplicant, only: [:show, :edit, :update, :destroy, :logging, :building, :score]
+  before_action :setDocker, only: [:update, :show]
 
   def index
     @applicants = Applicant.all
@@ -34,12 +34,12 @@ class ApplicantsController < ApplicationController
     require 'timers'
     timers = Timers::Group.new
 
-    paused_timer = timers.every(7) { puts "5sec paused" }
+    pausedTimer = timers.every(7) { puts "5sec paused" }
 
-    paused_timer.resume
+    pausedTimer.resume
     10.times { timers.wait } # will fire timer
 
-    @docker = get_docker @applicant.id
+    @docker = getDocker @applicant.id
 
     @docker.delete(force: true)
 
@@ -52,7 +52,7 @@ class ApplicantsController < ApplicationController
     render :show
   end
 
-  def get_docker(id)
+  def getDocker(id)
     begin
       return Docker::Container.get("applicant_#{id}_run")
     rescue
@@ -63,7 +63,7 @@ class ApplicantsController < ApplicationController
   def create
     @challenges = Challenge.all
 
-    @applicant = Applicant.new(applicant_params)
+    @applicant = Applicant.new(applicantParams)
     respond_to do |format|
       if @applicant.save
         format.html { redirect_to @applicant, notice: 'Applicant was successfully created.' }
@@ -75,7 +75,7 @@ class ApplicantsController < ApplicationController
 
   def update
     respond_to do |format|
-      if @applicant.update(applicant_params)
+      if @applicant.update(applicantParams)
         format.html {redirect_to @applicant.challenge, notice: 'Applicant was successfully updated'}
         if @applicant.attachment != nil
           #puts "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
@@ -96,7 +96,7 @@ class ApplicantsController < ApplicationController
         format.html {render :edit}
       end
     end
-    @applicant.update(applicant_params)
+    @applicant.update(applicantParams)
   end
 
   def destroy
@@ -112,11 +112,11 @@ class ApplicantsController < ApplicationController
 
   private
   # Use callbacks to share common setup or constraints between actions.
-  def set_applicant
+  def setApplicant
     @applicant = Applicant.find(params[:id])
   end
 
-  def set_docker
+  def setDocker
     begin
       @docker = Docker::Container.get("applicant_#{@applicant.id}")
     rescue
@@ -125,7 +125,7 @@ class ApplicantsController < ApplicationController
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
-  def applicant_params
+  def applicantParams
     params.require(:applicant).permit(:name, :email, :score, :token, :challenge_id, :attachment, :id, :log, :language)
   end
 end

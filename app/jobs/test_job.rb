@@ -9,21 +9,21 @@ class TestJob < ApplicationJob
     @applicant.log = nil
     @applicant.score = 0
     @applicant.save
-    @docker = get_test_docker @applicant.id
-    delete_docker
+    @docker = getTestDocker @applicant.id
+    deleteDocker
     if @applicant.language == 'SpringBoot'
-      create_spring_test_docker
-      spring_test
+      createSpringTestDocker
+      springTest
     elsif  @applicant.language == 'RubyonRails'
-      create_rails_test_docker
-      rails_test
+      createRailsTestDocker
+      railsTest
     else
-      delete_docker
+      deleteDocker
       puts "Framework was not selected"
     end
   end
 
-  def get_test_docker(id)
+  def getTestDocker(id)
     begin
       return Docker::Container.get("applicant_#{id}_test")
     rescue
@@ -31,7 +31,7 @@ class TestJob < ApplicationJob
     end
   end
 
-  def spring_test
+  def springTest
     @command = ['bash', '-c', 'gradle test']
     @print = @docker.exec(@command)
     #puts @print
@@ -60,14 +60,14 @@ class TestJob < ApplicationJob
     @applicant.score = 100 - (@arrFailMessages.size * 5)
     @applicant.save
     # delete
-    delete_docker
+    deleteDocker
     #rescue
      # delete_docker
       #puts "applicant_#{@applicant.id} spring test failed"
     #end
   end
 
-  def rails_test
+  def railsTest
     begin
       @command = ['bash', '-c', 'rails test test/controllers/test_rails.rb']
       @print = @docker.exec(@command)
@@ -104,9 +104,9 @@ class TestJob < ApplicationJob
       @applicant.score = 100 - (@arrFailMessages.size * 12)
       @applicant.save
       # delete
-      delete_docker
+      deleteDocker
     rescue
-      delete_docker
+      deleteDocker
       puts "applicant_#{@applicant.id} spring test failed"
     end
   end

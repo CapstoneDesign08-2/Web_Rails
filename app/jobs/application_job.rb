@@ -5,7 +5,7 @@ class ApplicationJob < ActiveJob::Base
   $createPort=5000
   $runPort=6000
 
-  def create_spring_test_docker
+  def createSpringTestDocker
     begin
       $applicantPort= $createPort + @applicant.id
     @docker = Docker::Container.create(
@@ -23,13 +23,13 @@ class ApplicationJob < ActiveJob::Base
       return @docker
     rescue
       puts "applicant_#{@applicant.id} spring docker failed to create"
-      delete_docker
+      deleteDocker
       return nil
     end
 
   end
 
-  def create_rails_test_docker
+  def createRailsTestDocker
     begin
       $applicantPort= $createPort + @applicant.id
       @docker = Docker::Container.create(
@@ -46,11 +46,11 @@ class ApplicationJob < ActiveJob::Base
       #@docker.exec(@command)
     rescue
       puts "applicant_#{@applicant.id} RAILS docker failed to create"
-      delete_docker
+      deleteDocker
     end
   end
 
-  def create_spring_run_docker
+  def createSpringRunDocker
     $applicantPort= $runPort + @applicant.id
     @docker = Docker::Container.create(
         'name': "applicant_#{@applicant.id}_run",
@@ -66,7 +66,7 @@ class ApplicationJob < ActiveJob::Base
     @docker.exec(@command, detach: true)
   end
 
-  def create_rails_run_docker
+  def createRailsRunDocker
     $applicantPort= $runPort + @applicant.id
     @docker = Docker::Container.create(
         'name': "applicant_#{@applicant.id}_run",
@@ -83,7 +83,7 @@ class ApplicationJob < ActiveJob::Base
   end
 
 
-  def delete_docker
+  def deleteDocker
     if @docker != nil
       @docker.delete(force: true)
     end

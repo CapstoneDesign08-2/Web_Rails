@@ -5,15 +5,15 @@ class RunJob < ApplicationJob
   def perform(*id)
     # 실행할 작업
     @applicant = Applicant.find_by(id: id)
-    @docker = get_docker @applicant.id
+    @docker = getDocker @applicant.id
     begin
-      delete_docker
+      deleteDocker
       if @applicant.language == 'SpringBoot'
-        create_spring_run_docker
+        createSpringRunDocker
       elsif  @applicant.language == 'RubyonRails'
-        create_rails_run_docker
+        createRailsRunDocker
       else
-        delete_docker
+        deleteDocker
         puts "Framework was not selected"
       end
     rescue
@@ -24,7 +24,7 @@ class RunJob < ApplicationJob
     end
   end
 
-  def get_docker(id)
+  def getDocker(id)
     begin
       return Docker::Container.get("applicant_#{id}_run")
     rescue
