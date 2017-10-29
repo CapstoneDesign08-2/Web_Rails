@@ -3,14 +3,14 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 $ cnt=1
 $(document).ready(->
-  $('.gradeTest').click(->Waitime());
+  $('.gradeTest').click(->waitTime());
 );
 
 $(document).on('turbolinks:load', ->
-  ShowScores();
+  showScores();
 );
 
-Showlog =->
+showLog =->
   $.ajax(
     type : 'GET',
     url: '/applicants/logging/' + $('#current_id').val(),
@@ -20,7 +20,7 @@ Showlog =->
       if(json==""&&cnt<4)
         $('.result').html("don't touch button. retry - "+ cnt)
         $ cnt=cnt+1
-        setTimeout(Showlog,25000)
+        setTimeout(showLog,25000)
       else if(cnt>=4)
         $('.result').html("Time Over. Please, Restart.")
     )
@@ -30,17 +30,7 @@ Showlog =->
     )
   );
 
-ShowScore =->
-  $.ajax(
-    type:'GET',
-    url:'/applicants/score/'+ $('#current_id').val(),
-    dataType:'html'
-    success: (json)->(
-      $('.resultPoint').html(json+'/100 point')
-    )
-  );
-
-ShowScores =->
+showScores =->
   $.ajax(
     type:'GET',
     url:'/applicants/score/'+ $('#current_id').val(),
@@ -51,17 +41,24 @@ ShowScores =->
   );
 
 
-RunAjax = ->
-  Showlog();
-  ShowScore();
+runAjax = ->
+  showLog();
+  $.ajax(
+    type:'GET',
+    url:'/applicants/score/'+ $('#current_id').val(),
+    dataType:'html'
+    success: (json)->(
+      $('.resultPoint').html(json+'/100 point')
+    )
+  );
   cnt=1
-  $('.gradeTest').click(->Waitime());
+  $('.gradeTest').click(->waitTime());
 
-Waitime =->
+waitTime =->
   $('.result').html('Ready');
   $('.resultPoint').html('??/100 point');
   $('.gradeTest').unbind("click");
   $ dt = new Date()
   $ dt.setSeconds(dt.getSeconds()+60);
   $('.result').html("Prediction Time - "+dt.toTimeString())
-  setTimeout(RunAjax, 60000);
+  setTimeout(runAjax, 60000);
