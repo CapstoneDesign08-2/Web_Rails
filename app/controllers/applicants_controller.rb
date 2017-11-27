@@ -28,16 +28,7 @@ class ApplicantsController < ApplicationController
 
   def building
     RunJob.perform_later @applicant.id
-
-
-
-    require 'timers'
-    timers = Timers::Group.new
-
-    pausedTimer = timers.every(7) { puts "5sec paused" }
-
-    pausedTimer.resume
-    10.times { timers.wait } # will fire timer
+    sleep(5.minutes)
 
     @docker = getDocker @applicant.id
 

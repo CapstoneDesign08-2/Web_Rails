@@ -110,6 +110,7 @@
         <method />
       </configuration>
     </shared>
+    <local />
   </component>
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
