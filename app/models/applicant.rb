@@ -1,6 +1,5 @@
 class Applicant < ApplicationRecord
-  mount_uploader :attachment, AttachmentUploader
-  mount_uploader :attachments3, Attachments3Uploader
   has_secure_token :token
-  belongs_to :challenge
+  has_many :applicnat_result_at_challenges
+  has_many :challenges,:through => :applicant_result_at_challenges
 end
