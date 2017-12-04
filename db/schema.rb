@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(version: 20171025074412) do
 
-  create_table "applicant_result_at_chllenges", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "applicant_result_at_challenges", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "challenges_id"
     t.integer  "applicants_id"
     t.integer  "score"
@@ -21,8 +21,8 @@ ActiveRecord::Schema.define(version: 20171025074412) do
     t.string   "language"
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
-    t.index ["applicants_id"], name: "index_applicant_result_at_chllenges_on_applicants_id", using: :btree
-    t.index ["challenges_id"], name: "index_applicant_result_at_chllenges_on_challenges_id", using: :btree
+    t.index ["applicants_id"], name: "index_applicant_result_at_challenges_on_applicants_id", using: :btree
+    t.index ["challenges_id"], name: "index_applicant_result_at_challenges_on_challenges_id", using: :btree
   end
 
   create_table "applicants", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
