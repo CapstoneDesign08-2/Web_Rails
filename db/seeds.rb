@@ -89,20 +89,15 @@ challenge01.save
 challenge02.save
 
 user01 = Applicant.create(:name => 'Cha',
-                      :email => 'aaa@gmail.com',
-                      :challenge => challenge01)
+                      :email => 'aaa@gmail.com')
 user02 = Applicant.create(:name => 'Jeon',
-                          :email => 'bbb@gmail.com',
-                          :challenge => challenge02)
+                          :email => 'bbb@gmail.com')
 user03 = Applicant.create(:name => 'Hong01',
-                          :email => 'ccc@gmail.com',
-                          :challenge => challenge01)
+                          :email => 'ccc@gmail.com')
 user04 = Applicant.create(:name => 'Jung',
-                          :email => 'ddd@gmail.com',
-                          :challenge => challenge02)
+                          :email => 'ddd@gmail.com')
 user05 = Applicant.create(:name => 'Hong02',
-                          :email => 'eee@gmail.com',
-                          :challenge => challenge01)
+                          :email => 'eee@gmail.com')
 user01.save
 user02.save
 user03.save

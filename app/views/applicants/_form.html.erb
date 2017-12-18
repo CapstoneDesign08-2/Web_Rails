@@ -21,7 +21,8 @@
     </div>
     <br>
     <div class = "action">
-      <%= a.label :challenge %>
+      <%= @result %>
+      <%= a.label :challenge_id %>
       <%= a.select(:challenge_id, @challenges.collect { |r| [r.id]}) %> &nbsp;
       <%= a.submit %>
     </div>

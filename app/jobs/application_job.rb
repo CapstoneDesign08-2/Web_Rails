@@ -7,22 +7,22 @@ class ApplicationJob < ActiveJob::Base
 
   def createSpringTestDocker
     begin
-      $applicantPort= $createPort + @applicant.id
+      $applicantPort= $createPort + @result.applciant_id
     @docker = Docker::Container.create(
-        'name': "applicant_#{@applicant.id}_test",
+        'name': "applicant_#{@result.applciant_id}_test",
         'Image': 'dennischa50/board',
         'Tty': true,
         'Interactive': true,
         'ExposedPorts': { '8080/tcp' => {} },
         'HostConfig': {'PortBindings': {'8080/tcp' => [{'HostPort': "#{$applicantPort}"}]},
-        'Binds': ["#{$project_unzip_path}/#{@applicant.id}:/home"]
+        'Binds': ["#{$project_unzip_path}/#{@result.applciant_id}:/home"]
         })
     @docker.start
     @command = ['bash', '-c', 'gradle clean']
     @docker.exec(@command)
       return @docker
     rescue
-      puts "applicant_#{@applicant.id} spring docker failed to create"
+      puts "applicant_#{@result.applciant_id} spring docker failed to create"
       deleteDocker
       return nil
     end
@@ -31,35 +31,35 @@ class ApplicationJob < ActiveJob::Base
 
   def createRailsTestDocker
     begin
-      $applicantPort= $createPort + @applicant.id
+      $applicantPort= $createPort + @result.applciant_id
       @docker = Docker::Container.create(
-          'name': "applicant_#{@applicant.id}_test",
+          'name': "applicant_#{@result.applciant_id}_test",
           'Image': 'dennischa50/board_rails',
           'Tty': true,
           'Interactive': true,
           'ExposedPorts': { '8080/tcp' => {} },
           'HostConfig': {'PortBindings': {'8080/tcp' => [{'HostPort': "#{$applicantPort}"}]},
-                         'Binds': ["#{$project_unzip_path}/#{@applicant.id}:/home"]
+                         'Binds': ["#{$project_unzip_path}/#{@result.applciant_id}:/home"]
           })
       @docker.start
       #@command = ['bash', '-c', 'gradle clean']
       #@docker.exec(@command)
     rescue
-      puts "applicant_#{@applicant.id} RAILS docker failed to create"
+      puts "applicant_#{@result.applciant_id} RAILS docker failed to create"
       deleteDocker
     end
   end
 
   def createSpringRunDocker
-    $applicantPort= $runPort + @applicant.id
+    $applicantPort= $runPort + @result.applciant_id
     @docker = Docker::Container.create(
-        'name': "applicant_#{@applicant.id}_run",
+        'name': "applicant_#{@result.applciant_id}_run",
         'Image': 'dennischa50/board',
         'Tty': true,
         'Interactive': true,
         'ExposedPorts': { '8080/tcp' => {} },
         'HostConfig': {'PortBindings': {'8080/tcp' => [{'HostPort': "#{$applicantPort}"}]},
-        'Binds': ["#{$project_unzip_path}/#{@applicant.id}:/home"]
+        'Binds': ["#{$project_unzip_path}/#{@result.applciant_id}:/home"]
     })
     @docker.start
     @command = ['bash', '-c', 'gradle run']
@@ -67,15 +67,15 @@ class ApplicationJob < ActiveJob::Base
   end
 
   def createRailsRunDocker
-    $applicantPort= $runPort + @applicant.id
+    $applicantPort= $runPort + @result.applciant_id
     @docker = Docker::Container.create(
-        'name': "applicant_#{@applicant.id}_run",
+        'name': "applicant_#{@result.applciant_id}_run",
         'Image': 'dennischa50/board_rails',
         'Tty': true,
         'Interactive': true,
         'ExposedPorts': { '3000/tcp' => {} },
         'HostConfig': {'PortBindings': {'3000/tcp' => [{'HostPort' => "#{$applicantPort}"}]},
-                       'Binds': ["#{$project_unzip_path}/#{@applicant.id}:/home"]
+                       'Binds': ["#{$project_unzip_path}/#{@result.applciant_id}:/home"]
         })
     @docker.start
     @command = ['bash', '-c', 'rails s']

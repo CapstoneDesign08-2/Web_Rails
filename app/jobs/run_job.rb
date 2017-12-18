@@ -2,15 +2,15 @@ class RunJob < ApplicationJob
   # 넣어줄 특정 큐 이름
   queue_as :run_queue
 
-  def perform(*id)
+  def perform(*result)
     # 실행할 작업
-    @applicant = Applicant.find_by(id: id)
+    @applicant = Applicant.find_by(id: @result.applicant_id)
     @docker = getDocker @applicant.id
     begin
       deleteDocker
-      if @applicant.language == 'SpringBoot'
+      if result.language == 'SpringBoot'
         createSpringRunDocker
-      elsif  @applicant.language == 'RubyonRails'
+      elsif  result.language == 'RubyonRails'
         createRailsRunDocker
       else
         deleteDocker

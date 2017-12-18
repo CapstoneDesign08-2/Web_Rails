@@ -30,8 +30,8 @@ class ChallengesController < ApplicationController
 
   def update
     respond_to do |format|
-      format.json {render plain: @applicant.log}
-      TestJob.perform_later @applicant.id
+      format.json {render plain: @result.log}
+      TestJob.perform_later @result
     end
   end
 
@@ -40,13 +40,16 @@ class ChallengesController < ApplicationController
   def setChallenge
     @challenge = Challenge.find(params[:id])
   end
+  def setResult
+    @result = ApplicantResultAtChallenge.where("applicant_id=? AND challenge_id=?",params(:applicant_id),params(:challenge_id))
+  end
 
   def setApplicant
-    @applicant = Applicant.where(challenge_id: params[:id]).find_by(token: params[:token])
+    @applicant = Applicant.find_by(token: params[:token])
     if @applicant
       log_in @applicant
     else
-      @applicant = Applicant.where(challenge_id: params[:id]).find_by(token: session[:token])
+      @applicant = Applicant.find_by(token: session[:token])
       render json: {error: 'Not Authorized'}, status: 401 unless @applicant
     end
   end

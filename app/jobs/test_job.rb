@@ -3,18 +3,20 @@ class TestJob < ApplicationJob
   # 넣어줄 특정 큐 이름
   queue_as :test_queue
 
-  def perform(*id)
+  def perform(*result1)
     # 실행할 작업
-    @applicant = Applicant.find_by(id: id)
-    @applicant.log = nil
-    @applicant.score = 0
-    @applicant.save
-    @docker = getTestDocker @applicant.id
+    @result = ApplicantResultAtChallenge.create(:applicant_id => @result1.applicant_id,
+                                                :challlenge_id => @result1.challenge_id)
+
+    @result.log = nil
+    @result.score = 0
+    @result.save
+    @docker = getTestDocker @result.applicant_id
     deleteDocker
-    if @applicant.language == 'SpringBoot'
+    if @result.language == 'SpringBoot'
       createSpringTestDocker
       springTest
-    elsif  @applicant.language == 'RubyonRails'
+    elsif  @result.language == 'RubyonRails'
       createRailsTestDocker
       railsTest
     else
@@ -56,9 +58,9 @@ class TestJob < ApplicationJob
       @failMessage = "SUCCESS"
     end
 
-    @applicant.log = @failMessage
-    @applicant.score = 100 - (@arrFailMessages.size * 5)
-    @applicant.save
+    @result.log = @failMessage
+    @result.score = 100 - (@arrFailMessages.size * 5)
+    @result.save
     # delete
     deleteDocker
     #rescue
@@ -100,14 +102,14 @@ class TestJob < ApplicationJob
         @failMessage = "SUCCESS"
       end
 
-      @applicant.log = @failMessage
-      @applicant.score = 100 - (@arrFailMessages.size * 12)
-      @applicant.save
+      @result.log = @failMessage
+      @result.score = 100 - (@arrFailMessages.size * 12)
+      @result.save
       # delete
       deleteDocker
     rescue
       deleteDocker
-      puts "applicant_#{@applicant.id} spring test failed"
+      puts "applicant_#{@result.applicant_id} spring test failed"
     end
   end
 end
